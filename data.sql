@@ -28,3 +28,20 @@ INSERT INTO invoices (comp_Code, amt, paid, paid_date)
          ('apple', 200, false, null),
          ('apple', 300, true, '2018-01-01'),
          ('ibm', 400, false, null);
+
+-- Insert sample data into industries
+INSERT INTO industries (code, industry) 
+VALUES ('acct', 'Accounting'),
+       ('tech', 'Technology'),
+       ('mktg', 'Marketing'),
+       ('finance', 'Finance');
+
+-- Insert associations between companies and industries
+INSERT INTO companies_industries (comp_code, industry_code) 
+VALUES ('apple', 'tech'),
+       ('apple', 'mktg'),
+       ('ibm', 'tech'),
+       ('ibm', 'finance'),
+       ('microsoft', 'tech'),
+       ('microsoft', 'finance'),
+       ('microsoft', 'mktg');

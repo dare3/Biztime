@@ -1,34 +1,15 @@
-const express = require("express");
-
-const ExpressError = require("./expressError")
-const companiesRoutes = require("../routes/companies");
-const invoicesRoutes = require("../routes/invoices");
-
+// app.js
+const express = require('express');
 const app = express();
+const companyRoutes = require('./routes/companies');
+const invoiceRoutes = require('./routes/invoices');
+const industryRoutes = require('./routes/industries');
 
+app.use(express.json()); // Middleware to parse JSON bodies
+app.use('/companies', companyRoutes); // Companies routes
+app.use('/invoices', invoiceRoutes); // Invoices routes
+app.use('/industries', industryRoutes); // Industries routes
 
-app.use(express.json());
-app.use("/companies", companiesRoutes);
-app.use("/invoices", invoicesRoutes);
-
-
-/** 404 handler */
-
-app.use(function (req, res, next) {
-  const err = new ExpressError("Not Found", 404);
-  return next(err);
+app.listen(3001, () => {
+  console.log('Server running on port 3000');
 });
-
-/** general error handler */
-
-app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-
-  return res.json({
-    error: err,
-    message: err.message
-  });
-});
-
-
-module.exports = app;
